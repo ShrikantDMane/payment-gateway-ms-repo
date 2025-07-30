@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '{{ .Release.Name }}'
+spec:
+  replicas: '{{ .Values.replicaCount }}'
+  selector:
+    matchLabels:
+      app: payment-gateway-ms
+  template:
+    metadata:
+      labels:
+        app: payment-gateway-ms
+    spec:
+      containers:
+        - name: payment-gateway-ms
+          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+          ports:
+            - containerPort: 8080

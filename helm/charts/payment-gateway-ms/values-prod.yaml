@@ -1,0 +1,22 @@
+replicaCount: 4
+
+image:
+  repository: your-ecr-repository/payment-gateway-ms
+  tag: prod
+  pullPolicy: Always
+
+service:
+  type: LoadBalancer
+  port: 8080
+
+resources:
+  limits:
+    cpu: "2"
+    memory: 2Gi
+  requests:
+    cpu: "1"
+    memory: 1Gi
+
+environment:
+  SPRING_PROFILES_ACTIVE: prod
+  DATABASE_URL: jdbc:postgresql://prod-db-url:5432/paymentdb
